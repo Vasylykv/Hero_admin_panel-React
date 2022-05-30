@@ -15,11 +15,13 @@ import { heroCreated } from '../../actions';
 // данных из фильтров
 
 const HeroesAddForm = () => {
-  const { filters, filtersLoadingStatus } = useSelector((state) => state);
-
   const [heroName, setHeroName] = useState('');
   const [heroDescr, setHeroDescr] = useState('');
   const [heroElement, setHeroElement] = useState('');
+
+  const { filters, filtersLoadingStatus } = useSelector(
+    (state) => state.filters
+  );
 
   const { request } = useHttp();
   const dispatch = useDispatch();
@@ -29,9 +31,9 @@ const HeroesAddForm = () => {
 
     const newHero = {
       id: uuidv4(),
-      heroName,
-      heroDescr,
-      heroElement,
+      name: heroName,
+      description: heroDescr,
+      element: heroElement,
     };
 
     request(`http://localhost:3001/heroes`, 'POST', JSON.stringify(newHero))
