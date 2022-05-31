@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from '../spinner/Spinner';
 
-import { fetchFilters, activeFilterChanged } from '../../actions';
+import { fetchFilters } from '../../actions';
+import { filtersActiveFilterChanged } from './filtersSlice';
 
 import classNames from 'classnames';
 // Задача для этого компонента:
@@ -20,7 +21,7 @@ const HeroesFilters = () => {
     (state) => state.filters
   );
   const dispatch = useDispatch();
-
+  console.log(filters);
   useEffect(() => {
     dispatch(fetchFilters(request));
     // eslint-disable-next-line
@@ -37,7 +38,7 @@ const HeroesFilters = () => {
         <button
           key={name}
           className={btnClass}
-          onClick={() => dispatch(activeFilterChanged(name))}
+          onClick={() => dispatch(filtersActiveFilterChanged(name))}
         >
           {label}
         </button>
